@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Fragments dinámicos"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/frgDiscos"
+        android:name="com.example.t6a1_ivanova_miroslava.fragments.DiscoFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        tools:layout="@layout/fragment_disco" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/frgCanciones"
+        android:name="com.example.t6a1_ivanova_miroslava.fragments.CancionFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        tools:layout="@layout/fragment_cancion" />
+</LinearLayout>
+
