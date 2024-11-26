@@ -1,9 +1,7 @@
 package com.example.t6a1_ivanova_miroslava.activities
 
-import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,37 +12,36 @@ import com.example.t6a1_ivanova_miroslava.R
 import com.example.t6a1_ivanova_miroslava.adapters.OnClickListener
 import com.example.t6a1_ivanova_miroslava.databinding.ActivityMainBinding
 import com.example.t6a1_ivanova_miroslava.fragments.CancionFragment
-import com.example.t6a1_ivanova_miroslava.fragments.CancionFragment.Companion.newInstance
 import com.example.t6a1_ivanova_miroslava.fragments.DiscoFragment
-import com.example.t6a1_ivanova_miroslava.fragments.DiscosListener
 import com.example.t6a1_ivanova_miroslava.pojos.Cancion
 import com.example.t6a1_ivanova_miroslava.pojos.Disco
 
-class MainActivity : AppCompatActivity(), DiscosListener {
+class MainActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var mBinding: ActivityMainBinding
 
+    private lateinit var discoFragment: DiscoFragment
     private lateinit var cancionFragment: CancionFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        cancionFragment = CancionFragment()
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-
-        if (savedInstanceState == null) {
-            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-            ) {
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (savedInstanceState == null) {
                 loadFragment(DiscoFragment())
-                loadFragment(CancionFragment())
 
             } else {
-                loadFragment(DiscoFragment())
-
+                if (savedInstanceState == null) {
+                    loadFragment(DiscoFragment(), R.id.frgDiscos)
+                    loadFragment(CancionFragment(), R.id.frgCanciones)
+                }
             }
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(mBinding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -52,22 +49,18 @@ class MainActivity : AppCompatActivity(), DiscosListener {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment, containerId: Int = R.id.frgDiscos) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frgDiscos, fragment)
+        transaction.replace(containerId, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-//
-//        cancionFragment = CancionFragment.newInstance(disco.getCanciones())
-//        loadFragment(cancionFragment)
+    override fun onClick(disco: Disco) {
+
+        cancionFragment = CancionFragment.newInstance(disco.getCanciones())
+        loadFragment(cancionFragment, R.id.frgCanciones)
 
 
-    override fun onDiscoSeleccionado(disco: Disco) {
-
-        val frgDiscos: DiscoFragment =
-            supportFragmentManager.findFragmentById(mBinding.frgDiscos.id) as DiscoFragment
-        frgDiscos.setDiscosListener(this)
     }
 }
