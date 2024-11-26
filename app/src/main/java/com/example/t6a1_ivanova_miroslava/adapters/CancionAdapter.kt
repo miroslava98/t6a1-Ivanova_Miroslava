@@ -32,7 +32,7 @@ class CancionAdapter(private val canciones: List<Cancion>) :
 
         val cancion = canciones.get(position)
         with(holder) {
-            setListener(cancion)
+
             binding.nombreCancion.text = cancion.getId().toString() + "." + cancion.getNombre()
             binding.textoDetalleCancion.text = cancion.getDuracion().toString()
         }
@@ -41,29 +41,6 @@ class CancionAdapter(private val canciones: List<Cancion>) :
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ListItemCancionBinding.bind(view)
 
-        fun setListener(cancion: Cancion) {
-            binding.root.setOnClickListener {
-                val dialogView =
-                    LayoutInflater.from(itemView.context).inflate(R.layout.dialog_cancion, null)
-                val tvCancionNombre = dialogView.findViewById<TextView>(R.id.tnumCancionNombre)
-                tvCancionNombre.text = cancion.getId().toString() + "." + cancion.getNombre()
 
-                val tvDuracionCancion = dialogView.findViewById<TextView>(R.id.tDuracionCancion)
-                tvDuracionCancion.text = cancion.getDuracion().toString()
-
-                MaterialAlertDialogBuilder(itemView.context)
-                    .setTitle("Canción seleccionada: ")
-                    .setView(dialogView)
-                    .setPositiveButton(
-                        "Aceptar", DialogInterface.OnClickListener { dialog, i ->
-                            dialog.cancel()
-                        })
-
-                    .setCancelable(false)
-                    .show()
-
-
-            }
-        }
     }
 }

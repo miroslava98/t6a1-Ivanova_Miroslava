@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.t6a1_ivanova_miroslava.R
@@ -19,7 +20,6 @@ private const val ARG_CANCIONES = "canciones"
 
 class CancionFragment : Fragment() {
 
-
     private lateinit var binding: FragmentCancionBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var itemDecoration: DividerItemDecoration
@@ -31,6 +31,7 @@ class CancionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("CancionFragment", "Canciones recibidas: $canciones")
+
         if (savedInstanceState != null) {
             canciones = savedInstanceState.get(ARG_CANCIONES) as? List<Cancion>
         } else {
@@ -39,7 +40,6 @@ class CancionFragment : Fragment() {
             }
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,5 +79,10 @@ class CancionFragment : Fragment() {
                 }
             }
 
+    }
+
+
+    fun mostrarDetalle(canciones: List<Cancion>){
+        this.canciones = canciones
     }
 }
