@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.t6a1_ivanova_miroslava.adapters.DiscoAdapter
-import com.example.t6a1_ivanova_miroslava.adapters.OnClickListener
+import com.example.t6a1_ivanova_miroslava.adapters.OnClickDiscoListener
 import com.example.t6a1_ivanova_miroslava.databinding.FragmentDiscoBinding
 import com.example.t6a1_ivanova_miroslava.pojos.Disco
 import com.example.t6a1_ivanova_miroslava.pojos.DiscoDatos
 
 
-class DiscoFragment : Fragment(), OnClickListener {
+class DiscoFragment : Fragment(), OnClickDiscoListener {
     private lateinit var discoAdapter: DiscoAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var itemDecoration: DividerItemDecoration

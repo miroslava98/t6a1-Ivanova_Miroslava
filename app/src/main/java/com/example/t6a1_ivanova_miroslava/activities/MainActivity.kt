@@ -7,16 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.t6a1_ivanova_miroslava.R
-import com.example.t6a1_ivanova_miroslava.adapters.OnClickListener
+import com.example.t6a1_ivanova_miroslava.adapters.OnClickDiscoListener
 import com.example.t6a1_ivanova_miroslava.databinding.ActivityMainBinding
 import com.example.t6a1_ivanova_miroslava.fragments.CancionFragment
 import com.example.t6a1_ivanova_miroslava.fragments.DiscoFragment
-import com.example.t6a1_ivanova_miroslava.pojos.Cancion
+import com.example.t6a1_ivanova_miroslava.fragments.DiscosListener
 import com.example.t6a1_ivanova_miroslava.pojos.Disco
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : AppCompatActivity(), DiscosListener {
 
     private lateinit var mBinding: ActivityMainBinding
 
@@ -32,7 +31,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (savedInstanceState == null) {
-                loadFragment(DiscoFragment())
+                discoFragment = DiscoFragment()
+                loadFragment(discoFragment)
+                discoFragment.setDiscosListener(this)
 
             } else {
                 if (savedInstanceState == null) {
@@ -56,11 +57,22 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         transaction.commit()
     }
 
-    override fun onClick(disco: Disco) {
 
-        cancionFragment = CancionFragment.newInstance(disco.getCanciones())
-        loadFragment(cancionFragment, R.id.frgCanciones)
+    override fun onDiscoSeleccionado(disco: Disco) {
+        if (disco != null) {
+            var hayCancion = supportFragmentManager.findFragmentById(R.id.frgCanciones) != null
 
+            if (hayCancion) {
+                cancionFragment = CancionFragment()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.frgCanciones, cancionFragment)
+                transaction.commitNow()
+                cancionFragment.mostrarDetalle(disco.getCanciones())
+            } else {
+                cancionFragment = CancionFragment.newInstance(disco.getCanciones())
+                loadFragment(cancionFragment)
+            }
+        }
 
     }
 }

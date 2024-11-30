@@ -81,7 +81,6 @@ class CancionFragment : Fragment() {
 
     }
 
-
     fun mostrarDetalle(canciones: List<Cancion>){
         this.canciones = canciones
     }

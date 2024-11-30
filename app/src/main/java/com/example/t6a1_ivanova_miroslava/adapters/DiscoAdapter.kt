@@ -9,7 +9,7 @@ import com.example.t6a1_ivanova_miroslava.R
 import com.example.t6a1_ivanova_miroslava.databinding.ListItemDiscoBinding
 import com.example.t6a1_ivanova_miroslava.pojos.Disco
 
-class DiscoAdapter(private val discos: List<Disco>, private val listener: OnClickListener) :
+class DiscoAdapter(private val discos: List<Disco>, private val listener: OnClickDiscoListener) :
     RecyclerView.Adapter<DiscoAdapter.ViewHolder>() {
 
     private lateinit var context: Context
