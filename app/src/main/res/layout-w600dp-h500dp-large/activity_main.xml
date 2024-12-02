@@ -7,29 +7,20 @@
     android:orientation="horizontal"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Fragments dinámicos"
-        android:textSize="24sp"
-        android:textStyle="bold" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frgDiscos"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="30"
+        android:layout_weight="60"
         tools:layout="@layout/fragment_disco" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frgCanciones"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="70"
+        android:layout_weight="40"
         tools:layout="@layout/fragment_cancion" />
-
 
 </LinearLayout>
 

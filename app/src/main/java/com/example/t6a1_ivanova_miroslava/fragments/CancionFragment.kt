@@ -25,30 +25,28 @@ class CancionFragment : Fragment() {
     private lateinit var itemDecoration: DividerItemDecoration
     private lateinit var cancionAdapter: CancionAdapter
 
-    private var canciones: List<Cancion>? = null
+    private var canciones: ArrayList<Cancion> = arrayListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("CancionFragment", "Canciones recibidas: $canciones")
-
-        if (savedInstanceState != null) {
-            canciones = savedInstanceState.get(ARG_CANCIONES) as? List<Cancion>
-        } else {
-            arguments?.let {
-                canciones = it.getSerializable(ARG_CANCIONES) as? List<Cancion>
+        retainInstance = true
+        arguments?.let {
+            val cancionesArg = it.getSerializable(ARG_CANCIONES) as? ArrayList<Cancion>
+            if (cancionesArg != null) {
+                canciones = cancionesArg
             }
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCancionBinding.inflate(inflater, container, false)
-
-
-        if (!canciones.isNullOrEmpty()) {
-            cancionAdapter = CancionAdapter(canciones!!)
+        println("CANCIONFRAGMENT RECUPERANDO EN CREATEVIEW ${canciones?.size}")
+        if (canciones.isNotEmpty()) {
+            cancionAdapter = CancionAdapter(canciones)
             linearLayoutManager = LinearLayoutManager(context)
             itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 
@@ -72,7 +70,7 @@ class CancionFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(canciones: List<Cancion>) =
+        fun newInstance(canciones: ArrayList<Cancion>) =
             CancionFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_CANCIONES, ArrayList(canciones))
@@ -81,7 +79,11 @@ class CancionFragment : Fragment() {
 
     }
 
-    fun mostrarDetalle(canciones: List<Cancion>){
+    fun mostrarDetalle(canciones: ArrayList<Cancion>) {
         this.canciones = canciones
+        if (::cancionAdapter.isInitialized) {
+            cancionAdapter.notifyDataSetChanged()
+        }
+
     }
 }
