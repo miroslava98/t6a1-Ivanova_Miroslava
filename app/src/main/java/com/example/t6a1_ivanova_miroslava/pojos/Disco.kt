@@ -4,7 +4,7 @@ class Disco(
     private var nombre: String,
     private var artista: String,
     private var anyo: Int,
-    private var canciones: List<Cancion>
+    private var canciones: ArrayList<Cancion>
 ) {
     fun getNombre(): String {
         return nombre
@@ -18,7 +18,7 @@ class Disco(
         return anyo
     }
 
-    fun getCanciones(): List<Cancion> {
+    fun getCanciones(): ArrayList<Cancion> {
         return canciones
     }
 }
@@ -28,14 +28,14 @@ class DiscoDatos {
     companion object {
         val DISCOS = arrayListOf(
             Disco(
-                "Still Got the Blues", "Gary Moore", 1990, listOf(
+                "Still Got the Blues", "Gary Moore", 1990, arrayListOf(
                     Cancion(1, "Still Got the Blues", 4.10f),
                     Cancion(2, "Texas Strut", 4.51f),
                     Cancion(3, "Too Tired", 2.50f)
                 )
             ),
             Disco(
-                "Abbey Road", "The Beatles", 1969, listOf(
+                "Abbey Road", "The Beatles", 1969, arrayListOf(
                     Cancion(1, "Come Together", 4.20f),
                     Cancion(2, "Something", 3.03f),
                     Cancion(3, "Maxwell's Silver Hammer", 3.27f),
@@ -56,7 +56,7 @@ class DiscoDatos {
                 )
             ),
             Disco(
-                "Thriller", "Michael Jackson", 1982, listOf(
+                "Thriller", "Michael Jackson", 1982, arrayListOf(
                     Cancion(1, "Wanna Be Startin' Somethin'", 6.03f),
                     Cancion(2, "Baby Be Mine", 4.20f),
                     Cancion(3, "The Girl Is Mine", 3.42f),
@@ -69,7 +69,7 @@ class DiscoDatos {
                 )
             ),
             Disco(
-                "Back in Black", "AC/DC", 1980, listOf(
+                "Back in Black", "AC/DC", 1980, arrayListOf(
                     Cancion(1, "Hells Bells", 5.12f),
                     Cancion(2, "Shoot to Thrill", 5.17f),
                     Cancion(3, "What Do You Do for Money Honey", 3.33f),
@@ -83,7 +83,7 @@ class DiscoDatos {
                 )
             ),
             Disco(
-                "Rumours", "Fleetwood Mac", 1977, listOf(
+                "Rumours", "Fleetwood Mac", 1977, arrayListOf(
                     Cancion(1, "Second Hand News", 2.43f),
                     Cancion(2, "Dreams", 4.14f),
                     Cancion(3, "Never Going Back Again", 2.02f),
@@ -98,7 +98,7 @@ class DiscoDatos {
                 )
             ),
             Disco(
-                "Nevermind", "Nirvana", 1991, listOf(
+                "Nevermind", "Nirvana", 1991, arrayListOf(
                     Cancion(1, "Smells Like Teen Spirit", 5.01f),
                     Cancion(2, "In Bloom", 4.15f),
                     Cancion(3, "Come as You Are", 3.39f),
