@@ -2,19 +2,16 @@ package com.example.t6a1_ivanova_miroslava.activities
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.t6a1_ivanova_miroslava.R
-import com.example.t6a1_ivanova_miroslava.adapters.OnClickDiscoListener
 import com.example.t6a1_ivanova_miroslava.databinding.ActivityMainBinding
 import com.example.t6a1_ivanova_miroslava.fragments.CancionFragment
 import com.example.t6a1_ivanova_miroslava.fragments.DiscoFragment
 import com.example.t6a1_ivanova_miroslava.fragments.DiscosListener
-import com.example.t6a1_ivanova_miroslava.pojos.Cancion
 import com.example.t6a1_ivanova_miroslava.pojos.Disco
 
 class MainActivity : AppCompatActivity(), DiscosListener {
